@@ -30,9 +30,10 @@ export async function POST(request) {
         console.log('blob upload completed', blob, tokenPayload);
  
         try {
-          
+            console.log(blob.url)
         // Call the OPEN.AT model to analyze the image
           const analysisResponse = await analyzeImage(blob.url);
+          console.log(analysisReponse)
           
           return new Response(JSON.stringify(analysisResponse), {
             status: 200,
@@ -41,7 +42,7 @@ export async function POST(request) {
 
 
         } catch (error) {
-          throw new Error('Could not update user');
+          throw new Error('Error analyzing the image');
         }
       },
     });
