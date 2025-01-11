@@ -27,7 +27,7 @@ export async function POST(request) {
            
         // Call the OPEN.AT model to analyze the image
           const analysisResponse = await analyzeImage(blob.url);
-          console.log(analysisReponse)
+          console.log("AnalysisReponse" + JSON.stringify.analysisResponse);
                     
           return JSON.stringify.analysisResponse 
           
