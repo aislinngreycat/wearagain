@@ -1,5 +1,6 @@
 import { handleUpload } from '@vercel/blob/client';
 import { NextResponse } from 'next/server';
+import { Configuration, OpenAIApi } from 'openai';
  
 export async function POST(request) {
   const body = await request.json();
@@ -29,9 +30,16 @@ export async function POST(request) {
         console.log('blob upload completed', blob, tokenPayload);
  
         try {
-          // Run any logic after the file upload completed
-          // const { userId } = JSON.parse(tokenPayload);
-          // await db.update({ avatar: blob.url, userId });
+          
+        // Call the OPEN.AT model to analyze the image
+          const analysisResponse = await analyzeImage(blob.url);
+          
+          return new Response(JSON.stringify(analysisResponse), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          });
+
+
         } catch (error) {
           throw new Error('Could not update user');
         }
@@ -45,4 +53,23 @@ export async function POST(request) {
       { status: 400 }, // The webhook will retry 5 times waiting for a status 200
     );
   }
+}
+
+// Function to call the OPEN.AT model to analyze the image
+async function analyzeImage(imageUrl) {
+    const configuration = new Configuration({
+        apiKey: process.env.OPENAI_API_KEY,
+      });
+      const openai = new OpenAIApi(configuration);
+    
+      const prompt = `You are a professional stylist. This is an image of a used fashion item. I want to reuse this item. Please tell me how I can style this item in Javascript array format.\nImage URL: ${imageUrl}`;
+    
+      const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: prompt,
+        max_tokens: 150,
+      });
+    
+      const data = response.data.choices[0].text.trim();
+      return JSON.parse(data);
 }
