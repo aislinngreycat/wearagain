@@ -6,6 +6,7 @@ import React, { useReducer } from 'react';
  
 export default function UploadPage() {
   const inputFileRef = useRef(null);
+
   const [blob, setBlob] = useState(null);
   return (
     <>
@@ -31,6 +32,7 @@ export default function UploadPage() {
       {blob && (
         <div>
           Blob url: <a href={blob.url}>{blob.url}</a>
+
         </div>
       )}
     </>
