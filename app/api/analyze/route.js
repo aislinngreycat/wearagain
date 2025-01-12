@@ -14,11 +14,14 @@ const token = process.env.AZURE_OPENAI_API_KEY;
 try {
         
     console.log("Calling OpenAI with API Key--->" + token);
+    console.log("Passing URL blob--->" + JSON.stringify(body.blob));
 
     const configuration = new Configuration({
         apiKey: token,
         basePath: "https://models.inference.ai.azure.com",
       });
+
+   
     const openai = new OpenAIApi(configuration)
     
     const response = await openai.createChatCompletion({
@@ -31,7 +34,7 @@ try {
           {
             type: "image_url",
             image_url: {
-              "url": body.blob,
+              "url": JSON.stringify(body.blob),
             },
           },
         ],
