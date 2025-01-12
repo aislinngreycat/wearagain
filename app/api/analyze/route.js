@@ -48,7 +48,8 @@ return new Response(analysisResults);
 
 
     } catch (error) {
-        console.log(error)
+        const errorText = await error.response.text();
+        console.error(errorText)
         return NextResponse.json(
             { error: error.message },
             { status: 400 }, // The webhook will retry 5 times waiting for a status 200
