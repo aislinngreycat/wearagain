@@ -11,13 +11,12 @@ console.log(body);
 //Added Environment Variable 
 const token = process.env.AZURE_OPENAI_API_KEY;
 
-
 try {
         
     console.log("Calling OpenAI with API Key--->" + token);
 
     const configuration = new Configuration({
-        apiKey: process.env.AZURE_OPENAI_API_KEY,
+        apiKey: token,
         basePath: "https://models.inference.ai.azure.com",
       });
     const openai = new OpenAIApi(configuration)
