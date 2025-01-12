@@ -1,6 +1,6 @@
 import { handleUpload } from '@vercel/blob/client';
 import { NextResponse } from 'next/server';
-import { Configuration, OpenAIApi } from 'openai';
+
  
 export async function POST(request) {
 
@@ -23,10 +23,8 @@ export async function POST(request) {
     console.log('blob upload completed', blob, tokenPayload);
  
         try {
-           
-        // Call the OPEN.AT model to analyze the image
-          const analysisResponse = await analyzeImage(blob.url);
-          console.log("AnalysisReponse" + JSON.stringify.analysisResponse);
+        
+         
                     
           return JSON.stringify.analysisResponse 
           
@@ -45,33 +43,4 @@ export async function POST(request) {
   }
 }
 
-// Function to call the OPEN.AT model to analyze the image
-async function analyzeImage(imageUrl) {
 
-const configuration = new Configuration({
-        apiKey: process.env.OPENAI_API_KEY,
-      });
-const openai = new OpenAIApi(configuration);
-
-const response = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [
-      {
-        role: "user",
-        content: [
-          { type: "text", text: "You are a professional stylist. This is an image of a used fashion item. I want to reuse this item. Please tell me how I can style this item in Javascript array format." },
-          {
-            type: "image_url",
-            image_url: {
-              "url": "https://z8uwet03buwvrztb.public.blob.vercel-storage.com/Tennis_Racquet_Gold-e9oLawKK5HmrQqlbvs05b9WBW3fpTw.png",
-            },
-          },
-        ],
-      },
-    ],
-  });
-    
-      
-const data = response.data.choices[0].text.trim();
-return JSON.parse(data);
-}
