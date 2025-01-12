@@ -8,6 +8,7 @@ export default function UploadPage() {
   const inputFileRef = useRef(null);
 
   const [blob, setBlob] = useState(null);
+  const [analysisResult, setAnalysisResult] = useState(null);
   return (
     <>
       <h1>Upload Your Image</h1>
@@ -32,8 +33,11 @@ export default function UploadPage() {
       {blob && (
         <div>
           Blob url: <a href={blob.url}>{blob.url}</a>
-
-        </div>
+        </div>)}
+       {analysisResult && (
+        <div>
+          Analysis Result: {analysisResult}
+        </div> 
       )}
     </>
   );

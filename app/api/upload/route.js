@@ -25,11 +25,11 @@ export async function POST(request) {
  
         try {
            
-        // Call the OPEN.AT model to analyze the image
-          const analysisResponse = await analyzeImage(blob.url);
-          console.log("AnalysisReponse" + JSON.stringify.analysisResponse);
-                    
-          return JSON.stringify.analysisResponse 
+           
+    });
+
+  console.log(response.choices[0].message.content);
+}
           
         } catch (error) {
           throw new Error('Error analyzing the image');
@@ -46,21 +46,3 @@ export async function POST(request) {
   }
 }
 
-// Function to call the OPEN.AT model to analyze the image
-async function analyzeImage(imageUrl) {
-    const configuration = new Configuration({
-        apiKey: process.env.OPENAI_API_KEY,
-      });
-      const openai = new OpenAIApi(configuration);
-    
-      const prompt = `You are a professional stylist. This is an image of a used fashion item. I want to reuse this item. Please tell me how I can style this item in Javascript array format.\nImage URL: ${imageUrl}`;
-    
-      const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: prompt,
-        max_tokens: 150,
-      });
-    
-      const data = response.data.choices[0].text.trim();
-      return JSON.parse(data);
-}
