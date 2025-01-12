@@ -8,6 +8,7 @@ export async function POST(request) {
 
 const body = await request.json();
 console.log(body);
+//Added Environment Variable 
 const token = process.env.AZURE_OPENAI_API_KEY;
 
 
