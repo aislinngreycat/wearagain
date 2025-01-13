@@ -51,7 +51,7 @@ return new Response(analysisResults);
 
 
     } catch (error) {
-        const errorText = await error.response.text();
+        const errorText = await error.response;
         console.error(errorText)
         return NextResponse.json(
             { error: error.message },
