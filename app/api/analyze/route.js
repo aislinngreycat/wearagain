@@ -8,6 +8,7 @@ export async function POST(request) {
 
 const body = await request.json();
 console.log(body);
+console.log(body.blob.url);
 //Added Environment Variable 
 const token = process.env.AZURE_OPENAI_API_KEY;
 
@@ -34,7 +35,7 @@ try {
           {
             type: "image_url",
             image_url: {
-              "url": JSON.stringify(body.blob),
+              "url": JSON.stringify(body.blob.url),
             },
           },
         ],
