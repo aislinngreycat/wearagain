@@ -15,7 +15,7 @@ const token = process.env.AZURE_OPENAI_API_KEY;
 try {
         
     console.log("Calling OpenAI with API Key--->" + token);
-    console.log("Passing URL blob--->" + JSON.stringify(body.blob));
+    console.log("Passing URL blob--->" + JSON.stringify(body.blob.url));
 
     const configuration = new Configuration({
         apiKey: token,
@@ -35,7 +35,7 @@ try {
           {
             type: "image_url",
             image_url: {
-              "url": JSON.stringify(body.blob.url),
+              "url": body.blob.url,
             },
           },
         ],
