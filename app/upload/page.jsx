@@ -48,7 +48,7 @@ export default function UploadPage() {
   return (
     <div className={styles.analysisCard}>
      
-      <h1> Reduce Waste </h1>
+      <h1> Give your Pre-Loved Items a Freshstart! </h1>
       <h3> Upload a Picture of Your Old Fashion Items and get suggestions on you can re-style them!  </h3>
  
     
