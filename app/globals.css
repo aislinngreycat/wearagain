@@ -40,3 +40,30 @@ a {
     color-scheme: dark;
   }
 }
+
+.analysisform {
+  margin-bottom: 20px;
+}
+
+
+
+.error {
+  color: red;
+}
+
+.blob-info {
+  margin-bottom: 20px;
+}
+
+.analysis-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+h3{
+  margin: 20px auto;
+}

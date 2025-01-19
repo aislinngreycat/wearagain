@@ -27,28 +27,32 @@ try {
     
     const response = await openai.createChatCompletion({
     model: "gpt-4o-mini",
+    response_format: { type: "json_object" },
     messages: [
       {
         role: "user",
         content: [
-          { type: "text", text: "You are a professional stylist. This is an image of a used fashion item. I want to reuse this item. Please tell me how I can style this item." },
+          
+          { type: "text", text: "You are a professional stylist. This is an image of a used fashion item. I want to reuse this item. Please tell me how I can style this item. Please output the suggestions in JSON format within an array named 'styles'." },
+
           {
             type: "image_url",
             image_url: {
               "url": body.blob.url,
             },
           },
+          
         ],
+        
       },
     ],
   });
     
 
-const analysisResults = response.data.choices[0].message.content;
-console.log(analysisResults)
-
-
-return new Response(analysisResults);
+const analysis = response.data.choices[0].message.content;
+const analysisResults = JSON.parse(analysis)
+console.log(analysisResults.styles)
+return new Response(JSON.stringify(analysisResults.styles));
 
 
     } catch (error) {
